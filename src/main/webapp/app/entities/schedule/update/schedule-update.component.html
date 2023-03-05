@@ -1,0 +1,113 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-schedule-heading" data-cy="ScheduleCreateUpdateHeading">Create or edit a Schedule</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_area">Area</label>
+          <input type="text" class="form-control" name="area" id="field_area" data-cy="area" formControlName="area" />
+          <div *ngIf="editForm.get('area')!.invalid && (editForm.get('area')!.dirty || editForm.get('area')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('area')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('area')?.errors?.maxlength">
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_region">Region</label>
+          <input type="text" class="form-control" name="region" id="field_region" data-cy="region" formControlName="region" />
+          <div *ngIf="editForm.get('region')!.invalid && (editForm.get('region')!.dirty || editForm.get('region')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('region')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('region')?.errors?.maxlength">
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_state">State</label>
+          <select class="form-control" name="state" formControlName="state" id="field_state" data-cy="state">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let states of statesValues" [value]="states">states</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_activity">Activity</label>
+          <select class="form-control" name="activity" formControlName="activity" id="field_activity" data-cy="activity">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let activities of activitiesValues" [value]="activities">activities</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_date">Date</label>
+          <div class="input-group">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="text"
+              class="form-control"
+              name="date"
+              ngbDatepicker
+              #dateDp="ngbDatepicker"
+              formControlName="date"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_day">Day</label>
+          <select class="form-control" name="day" formControlName="day" id="field_day" data-cy="day">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let days of daysValues" [value]="days">days</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_onDuty">On Duty</label>
+          <select
+            class="form-control"
+            id="field_onDuty"
+            data-cy="onDuty"
+            name="onDuty"
+            formControlName="onDuty"
+            [compareWith]="compareOnDuty"
+          >
+            <option *ngIf="!editForm.get('onDuty')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="onDutyOption" *ngFor="let onDutyOption of onDutiesSharedCollection">{{ onDutyOption.dutyNo }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['onDuty'])!.invalid && (editForm.get(['onDuty'])!.dirty || editForm.get(['onDuty'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['onDuty'])?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

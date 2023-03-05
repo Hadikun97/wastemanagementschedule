@@ -1,0 +1,55 @@
+{
+  "applications": ["wsm5"],
+  "changelogDate": "20230301011646",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "schedule",
+  "fields": [
+    {
+      "fieldName": "area",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "region",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "States",
+      "fieldValues": "Kedah,Perlis,Johor,Peneng"
+    },
+    {
+      "fieldName": "activity",
+      "fieldType": "Activities",
+      "fieldValues": "Collector,Cleaning"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "day",
+      "fieldType": "Days",
+      "fieldValues": "Sunday,Monday,Teusday,Wednesday,Thusday,Friday,Saturday"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Schedule",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "dutyNo",
+      "otherEntityName": "onDuty",
+      "relationshipName": "onDuty",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "no"
+}

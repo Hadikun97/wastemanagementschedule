@@ -1,0 +1,1 @@
+org.springframework.test.context.ContextCustomizerFactory = com.unimap.wsm5.config.TestContainersSpringContextCustomizerFactory

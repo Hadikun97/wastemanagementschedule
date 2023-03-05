@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="onDuty">
+      <h2 data-cy="onDutyDetailsHeading"><span>On Duty</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ onDuty.id }}</span>
+        </dd>
+        <dt><span>Duty No</span></dt>
+        <dd>
+          <span>{{ onDuty.dutyNo }}</span>
+        </dd>
+        <dt><span>Staff</span></dt>
+        <dd>
+          <div *ngIf="onDuty.staff">
+            <a [routerLink]="['/staff', onDuty.staff.id, 'view']">{{ onDuty.staff.regNo }}</a>
+          </div>
+        </dd>
+        <dt><span>Transport</span></dt>
+        <dd>
+          <div *ngIf="onDuty.transport">
+            <a [routerLink]="['/transport', onDuty.transport.id, 'view']">{{ onDuty.transport.transportNo }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/on-duty', onDuty.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity OnDuty.
+    -->
+    <changeSet id="20230301011746-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="staff_id"
+                                 baseTableName="on_duty"
+                                 constraintName="fk_on_duty__staff_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="staff"/>
+
+        <addForeignKeyConstraint baseColumnNames="transport_id"
+                                 baseTableName="on_duty"
+                                 constraintName="fk_on_duty__transport_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="transport"/>
+    </changeSet>
+</databaseChangeLog>

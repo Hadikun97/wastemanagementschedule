@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-on-duty-heading" data-cy="OnDutyCreateUpdateHeading">Create or edit a On Duty</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dutyNo">Duty No</label>
+          <input type="text" class="form-control" name="dutyNo" id="field_dutyNo" data-cy="dutyNo" formControlName="dutyNo" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_staff">Staff</label>
+          <select class="form-control" id="field_staff" data-cy="staff" name="staff" formControlName="staff" [compareWith]="compareStaff">
+            <option *ngIf="!editForm.get('staff')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="staffOption" *ngFor="let staffOption of staffSharedCollection">{{ staffOption.regNo }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['staff'])!.invalid && (editForm.get(['staff'])!.dirty || editForm.get(['staff'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['staff'])?.errors?.required"> This field is required. </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_transport">Transport</label>
+          <select
+            class="form-control"
+            id="field_transport"
+            data-cy="transport"
+            name="transport"
+            formControlName="transport"
+            [compareWith]="compareTransport"
+          >
+            <option *ngIf="!editForm.get('transport')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="transportOption" *ngFor="let transportOption of transportsSharedCollection">
+              {{ transportOption.transportNo }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['transport'])!.invalid && (editForm.get(['transport'])!.dirty || editForm.get(['transport'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['transport'])?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

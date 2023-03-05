@@ -1,0 +1,37 @@
+{
+  "applications": ["wsm5"],
+  "changelogDate": "20230301011746",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "on_duty",
+  "fields": [
+    {
+      "fieldName": "dutyNo",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "OnDuty",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "regNo",
+      "otherEntityName": "staff",
+      "ownerSide": true,
+      "relationshipName": "staff",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "transportNo",
+      "otherEntityName": "transport",
+      "ownerSide": true,
+      "relationshipName": "transport",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "no"
+}

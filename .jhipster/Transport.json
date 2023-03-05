@@ -1,0 +1,31 @@
+{
+  "applications": ["wsm5"],
+  "changelogDate": "20230301011846",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "transport",
+  "fields": [
+    {
+      "fieldName": "transportNo",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "regsNo",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "Types",
+      "fieldValues": "Truck,Garbage_Truck,Other"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Transport",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

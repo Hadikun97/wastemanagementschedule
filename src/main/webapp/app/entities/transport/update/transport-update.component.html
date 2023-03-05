@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-transport-heading" data-cy="TransportCreateUpdateHeading">Create or edit a Transport</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_transportNo">Transport No</label>
+          <input
+            type="text"
+            class="form-control"
+            name="transportNo"
+            id="field_transportNo"
+            data-cy="transportNo"
+            formControlName="transportNo"
+          />
+          <div
+            *ngIf="editForm.get('transportNo')!.invalid && (editForm.get('transportNo')!.dirty || editForm.get('transportNo')!.touched)"
+          ></div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_regsNo">Regs No</label>
+          <input type="text" class="form-control" name="regsNo" id="field_regsNo" data-cy="regsNo" formControlName="regsNo" />
+          <div *ngIf="editForm.get('regsNo')!.invalid && (editForm.get('regsNo')!.dirty || editForm.get('regsNo')!.touched)"></div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let types of typesValues" [value]="types">types</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
